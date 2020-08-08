@@ -1,6 +1,6 @@
 #include "Tetoris.hpp"
 
-int main() {
+int main(int argc, char* args[]) {
 	tetoris::Tetoris game_Tetoris;
 	if (game_Tetoris.initialize()) {
 		game_Tetoris.runLoop();

@@ -1,13 +1,7 @@
 #include <SDL.h>
 #include <map>
-
-#define MOVE_R 1
-#define MOVE_L 2
-#define MOVE_SOFTDROP 4
-#define MOVE_HARDDROP 8
-#define MOVE_ROTATE_R 16
-#define MOVE_ROTATE_L 32
-#define MOVE_HOLD 64
+#include "Tetoris_util.h"
+#include "Tetoris_board.hpp"
 
 namespace tetoris {
 	
@@ -121,7 +115,8 @@ namespace tetoris {
 	}
 
 	void Tetoris::generateOutput() {
-		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+		SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);
+
 		SDL_RenderClear(renderer);
 		SDL_RenderPresent(renderer);
 	}
