@@ -1,4 +1,5 @@
 #include <SDL.h>
+#include <vector>
 #include <map>
 #include "Tetoris_util.h"
 #include "Tetoris_board.hpp"
@@ -9,8 +10,11 @@ namespace tetoris {
 	private:
 		SDL_Window* gameWindow;
 		SDL_Renderer* renderer;
+
 		bool isRunning;
 		unsigned int bitflag;
+		Tetoris_board mainBoard;
+		std::vector<Tetoris_board> subboards;
 		std::map<int, int> keymap;
 
 		void processInput();

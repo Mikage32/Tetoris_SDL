@@ -132,6 +132,7 @@
     <ClCompile Include="Tetoris.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="TetoriMino.hpp" />
     <ClInclude Include="Tetoris.hpp" />
     <ClInclude Include="Tetoris_board.hpp" />
     <ClInclude Include="Tetoris_util.h" />

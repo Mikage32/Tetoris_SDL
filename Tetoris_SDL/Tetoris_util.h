@@ -6,7 +6,10 @@
 #define MOVE_ROTATE_L 32
 #define MOVE_HOLD 64
 
+#define BOARD_MAX_SIZE_V 255
 #define BOARD_SIZE_V 20
 #define BOARD_SIZE_H 10
+
+#define GRAPH_SIZE 5
 
 #define rep(i,n) for(int i=0;i<n;++i)
