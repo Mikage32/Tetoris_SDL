@@ -129,7 +129,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="TetoriMino.cpp" />
     <ClCompile Include="Tetoris.cpp" />
+    <ClCompile Include="Tetoris_board.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TetoriMino.hpp" />

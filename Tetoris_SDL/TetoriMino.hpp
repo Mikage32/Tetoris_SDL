@@ -1,4 +1,6 @@
-#include "Tetoris_util.h"
+#pragma once
+
+#include "Tetoris_board.hpp"
 #include <map>
 
 namespace tetoris {
@@ -7,20 +9,13 @@ namespace tetoris {
 
 	class TetoriMino {
 	private:
-		int x, y;
-		int rotate;
+		MINO_ID id;
+		pii cordinate;
 		int graph[GRAPH_SIZE][GRAPH_SIZE];
-
-		static std::map<MINO_ID, int> mino_graph;
-		
 	public:
-		TetoriMino(MINO_ID id);
-
+		void init(MINO_ID id);
+		pii getCordiante();
+		void move(int bitflag, Tetoris_board& board);
 	};
 
-	TetoriMino::TetoriMino(MINO_ID) {
-		x = 4;
-		y = 0;
-		rotate = 0;
-	}
 }
