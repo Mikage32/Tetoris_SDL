@@ -13,15 +13,15 @@ namespace tetoris {
 		{
 			{0, 0, 0, 0, 0},
 			{0, 1, 1, 0, 0},
-			{0, 0, 1, 0, 0},
 			{0, 0, 1, 1, 0},
+			{0, 0, 0, 0, 0},
 			{0, 0, 0, 0, 0}
 		},
 		{
 			{0, 0, 0, 0, 0},
 			{0, 0, 1, 1, 0},
-			{0, 0, 1, 0, 0},
 			{0, 1, 1, 0, 0},
+			{0, 0, 0, 0, 0},
 			{0, 0, 0, 0, 0}
 		},
 		{
@@ -76,8 +76,16 @@ namespace tetoris {
 		return cordinate;
 	}
 
+	MINO_ID TetoriMino::getId() {
+		return id;
+	}
 
-	//ñ¢äÆê¨:âÒì]à»äOÇÃà⁄ìÆÇ™Ç≈Ç´Ç»Ç¢
+	void TetoriMino::getGraph(int graphBuf[GRAPH_SIZE][GRAPH_SIZE]) {
+		rep(i, GRAPH_SIZE) {
+			memcpy(graphBuf[i], graph[i], sizeof(int)*GRAPH_SIZE);
+		}
+	}
+
 	void TetoriMino::move(int bitflag, Tetoris_board& Tetoboard) {
 		int rotate_flag = (bitflag&MOVE_ROTATE_L ? -1 : 0) + (bitflag&MOVE_ROTATE_R ? 1 : 0);
 		int rotate_graph[GRAPH_SIZE][GRAPH_SIZE];
@@ -124,6 +132,9 @@ namespace tetoris {
 				}
 			}
 		}
+
+		cordinate.first += (bitflag&MOVE_L ? -1 : 0) + (bitflag&MOVE_R ? 1 : 0);
+		cordinate.second += (bitflag&MOVE_SOFTDROP ? 1 : 0);
 	}
 
 }

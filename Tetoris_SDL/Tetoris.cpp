@@ -132,19 +132,47 @@ namespace tetoris {
 		SDL_RenderClear(renderer);
 
 		int boardBuf[BOARD_MAX_SIZE_V][BOARD_SIZE_H];
+		mainBoard.get_board(boardBuf);
 		SDL_Rect cell;
 		cell.x = (DISPLAYSIZE_H - DISPLAYSIZE_V) / 2;
 		cell.y = 0;
 		cell.h = DISPLAYSIZE_V / 20;
 		cell.w = cell.h;
-		mainBoard.get_board(boardBuf);
 		REP(i, BOARD_MAX_SIZE_V - BOARD_SIZE_V, BOARD_MAX_SIZE_V) {
 			rep(j, BOARD_SIZE_H) {
 				color c = colorMap[static_cast<MINO_ID>(boardBuf[i][j])];
 				SDL_SetRenderDrawColor(renderer, c.r, c.g, c.b, c.a);
 				SDL_RenderFillRect(renderer, &cell);
+
+				cell.x += cell.w;
 			}
+
+			cell.x -= cell.w * 10;
+			cell.y += cell.h;
 		}
+
+		int minoBuf[GRAPH_SIZE][GRAPH_SIZE];
+		MainMino.getGraph(minoBuf);
+		pii cordinate = MainMino.getCordiante();
+		cell.x = (DISPLAYSIZE_H - DISPLAYSIZE_V) / 2 + (cordinate.first - 2)*cell.w;
+		cell.y = (cordinate.second - 2)*cell.h;
+		rep(i, GRAPH_SIZE) {
+			if (cordinate.second - 2 + i >= 0 && cordinate.second - 2 + i < BOARD_MAX_SIZE_V - BOARD_SIZE_V) {
+				rep(j, GRAPH_SIZE) {
+					if (cordinate.first - 2 + j >= 0 && cordinate.first - 2 + j < BOARD_SIZE_H && minoBuf[i][j] != 0) {
+						color c = colorMap[MainMino.getId()];
+						SDL_SetRenderDrawColor(renderer, c.r, c.g, c.b, c.a);
+						SDL_RenderFillRect(renderer, &cell);
+					}
+					cell.x += cell.w;
+				}
+
+				cell.x -= cell.w*GRAPH_SIZE;
+			}
+
+			cell.y += cell.h;
+		}
+
 
 		SDL_RenderPresent(renderer);
 	}

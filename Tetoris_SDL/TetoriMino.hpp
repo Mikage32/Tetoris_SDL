@@ -15,6 +15,8 @@ namespace tetoris {
 	public:
 		void init(MINO_ID id);
 		pii getCordiante();
+		MINO_ID getId();
+		void getGraph(int graphBuf[GRAPH_SIZE][GRAPH_SIZE]);
 		void move(int bitflag, Tetoris_board& board);
 	};
 
