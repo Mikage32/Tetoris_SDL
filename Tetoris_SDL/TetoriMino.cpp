@@ -112,7 +112,7 @@ namespace tetoris {
 		rep(i, GRAPH_SIZE) {
 			if (cordinate.second - 2 + i < 0 || cordinate.second - 2 + i >= BOARD_MAX_SIZE_V) continue;
 			rep(j, GRAPH_SIZE) {
-				if (cordinate.first - 2 + j < 0 || cordinate.first - 2 + j >= BOARD_SIZE_V) continue;
+				if (cordinate.first - 2 + j < 0 || cordinate.first - 2 + j >= BOARD_SIZE_H) continue;
 
 				if (rotate_graph[i][j] != 0 && board[cordinate.second - 2 + i][cordinate.first - 2 + i] != 0) {
 					ok = false;
@@ -133,8 +133,32 @@ namespace tetoris {
 			}
 		}
 
-		cordinate.first += (bitflag&MOVE_L ? -1 : 0) + (bitflag&MOVE_R ? 1 : 0);
-		cordinate.second += (bitflag&MOVE_SOFTDROP ? 1 : 0);
+		int x = (bitflag&MOVE_L ? -1 : 0) + (bitflag&MOVE_R ? 1 : 0);
+		int y = (bitflag&MOVE_SOFTDROP ? 1 : 0);
+
+		rep(i, GRAPH_SIZE) {
+			rep(j, GRAPH_SIZE) {
+				if (BOARD_MAX_SIZE_V - BOARD_SIZE_V + cordinate.second + y - 2 + i >= 0 && BOARD_MAX_SIZE_V - BOARD_SIZE_V + cordinate.second + y - 2 + i < BOARD_MAX_SIZE_V
+					&& cordinate.first + x - 2 + j >= 0 && cordinate.first + x - 2 + j < BOARD_SIZE_H) {
+
+					if (graph[i][j] != 0 && board[BOARD_MAX_SIZE_V - BOARD_SIZE_V + cordinate.second + y - 2 + i][cordinate.first + x - 2 + i] != 0) {
+						ok = false;
+						break;
+					}
+				}
+				else if(graph[i][j] != 0){
+					ok = false;
+					break;
+				}
+			}
+
+			if (!ok) break;
+		}
+
+		if (ok) {
+			cordinate.first += x;
+			cordinate.second += y;
+		}
 	}
 
 }
